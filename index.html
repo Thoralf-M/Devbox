@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Devbox</title>
+  <script src="./iotajs.js"> </script>
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300" rel="stylesheet">
+<style>
+  
+  #content{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Nunito Sans', sans-serif;
+    z-index: 0;
+    background:rgb(28, 30, 31);
+    background:rgb(23, 24, 29);
+  }
+  #content-main {
+    flex: 1;
+    display: flex;
+    position: relative;
+    font-size:30px;
+    color:rgb(218, 218, 218);
+  }
+  header{
+    color:rgb(236, 236, 236);
+    font-size:60px;
+    /* padding:10px; */
+    margin-top:-10px;
+    text-align: center;
+  }
+  .title span{
+    position: relative;
+    content: 'Devbox'
+  }
+  .title:hover span{
+    display: none;
+  }
+  .title:hover:after{
+    content: 'Trollbox';
+  }
+  body {
+    margin:0;
+  }
+  .left{
+    text-align:center;
+    margin-top:20px;
+    margin-left:15px;
+    width: 150%;
+  }
+  .input {
+    font-size:16px;
+    width: 97%;
+    height: 550px;
+    overflow:auto; 
+    display:inline-block;
+    color:rgb(202, 202, 202);
+    box-shadow:0 0 3rem 10px #000;
+    padding:1.5rem;
+    border: black;
+    border-radius:8px;
+    background: rgb(29, 30, 31);
+    background:radial-gradient(#132631 10%,#121a1f 90%);
+  }
+  .input:focus{
+    outline: none;
+  }
+  .button{
+    margin-left: 2rem;
+    margin-right: 2rem;
+    color:white;
+    padding-left:2rem;
+    padding-right:2rem;
+    padding-top:1rem;
+    padding-bottom:1rem;
+    border-radius:6px;
+    border:none;
+    transition: .25s;
+    box-shadow:0 0 1rem#000;
+    outline:0;
+  }
+  .button:hover{
+    transform:translateY(1px);
+  }
+  .run{
+    background:radial-gradient(#132631 10%,#121a1f 90%);
+  }
+  .run:hover {
+    background:radial-gradient(#1d4c68 10%,#062538 90%);
+    color: black;
+  }
+  .clear{
+    background:radial-gradient(#411b1b 10%,#271313 90%);
+  }
+  .clear:hover {
+    background:radial-gradient(#5e1e1e 10%,#270d0d 90%);
+    color: black;
+  }
+  .console{
+    font-size:16px;
+    width: 97%;
+    height: 500px;
+    margin-top:20px;
+    box-shadow:0 0 3rem 10px #000;
+    padding:1.5rem;
+    color:rgb(202, 202, 202);
+    border: black;
+    border-radius:8px;
+    display:inline-block;
+    overflow:auto;
+    background:radial-gradient(#411b1b 10%,#271313 90%);
+  }
+  .console:focus{
+    outline: none;
+  }
+  .right{
+    margin-left:40px;
+    margin-right:20px;
+    margin-top:10px;
+    margin-bottom: 30px;
+    word-break: break-word;
+  }
+  .fill-div{
+    margin:10px;
+    overflow:auto; 
+    display:inline-block;
+    color:rgb(209, 209, 209);
+    text-decoration: none;
+    text-align: center;
+    box-shadow:0 0 3rem 10px #000;
+    padding:1.5rem;
+    border-radius:8px;
+    transition:.3s;
+    background: rgb(29, 30, 31);
+  }
+  .fill-div:hover{
+    transform:translateY(-5px);
+    color:rgb(224, 224, 224);
+    background:#111111;
+    /* background:radial-gradient(#343d42 30%,#1e1e1f 90%); */
+  }
+  footer{
+    position: absolte;
+    bottom: 0;
+    color:#919191;
+    width:100%;
+    height: 100px;
+    text-align: center;
+    z-index: 1;
+    background: radial-gradient(ellipse at bottom,#25437caf,transparent 50%);
+  }
+  ::-webkit-scrollbar {
+    background-color: #1b1c21;
+    color: #c4c0ba;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #252a33;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #32373f;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background-color: #293341;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: #252a33;
+  }
+</style>
+</head>
+<body>
+<div id="content">
+<header><span class="title"><span>Devbox</span></span></header>
+<main id="content-main">
+
+<div class="left">
+<span style="font-size: 15px; margin-top:-50px; float:left;">Predefined: seed = '9'.repeat(81), node = https://nodes.thetangle.org:443</span>
+<textarea class="input" id="input" placeholder="Your Code"></textarea>
+  <input type="button" class="button clear" value="Clear input" onclick="document.getElementById('input').value=''" />
+  <input type="button" class="button clear" value="Clear output" onclick="document.getElementById('console').value=''" />
+  <input type="button" class="button run" value="Run" onclick="doIt();" />
+  <textarea readonly class="console" id="console" placeholder="Output"></textarea>
+  <span style="font-size: 14px; margin-left:30px;">F12 or Strg+Shift+J for better output</span>
+</div>
+<div class="right">
+  <a href="https://github.com/iotaledger/iota.js/blob/next/api_reference.md" target="_blank" rel="noopener" style="font-size: 20px; margin-top:-50px; float:right; color:rgb(138, 193, 255)">api reference</a>
+  <div class="fill-div" id="9">provider</div>
+  <div class="fill-div" id="A">getNodeInfo</div>
+  <div class="fill-div" id="B">generateAddress</div>
+  <div class="fill-div" id="D">transfers</div>
+  <div class="fill-div" id="C">convertText</div>
+  <div class="fill-div" id="E">detailed tx</div>
+  <div class="fill-div" id="F">value tx</div>
+  <div class="fill-div" id="G">promote</div>
+  <div class="fill-div" id="H">reattach</div>
+  <div class="fill-div" id="I">check inputs</div>
+</div>
+
+
+</main>
+<footer>Made by Thoralf</footer>
+</div>
+<script>
+var iota = core.composeAPI({
+  provider: 'https://nodes.thetangle.org:443'
+})
+var seed= '9'.repeat(81)
+
+
+var code= ['var iota = core.composeAPI({\n      provider: \'https://nodes.thetangle.org:443\'\n})',
+  'iota.getNodeInfo()\n    .then(info => console.log(info))\n    .catch(error => {\n        console.log(`Request error: ${error.message}`)\n})',
+'//seed, index, seclvl, checksum\nconsole.log(core.generateAddress(seed, 0, 2, true))',
+"console.log(converter.asciiToTrytes('Text'))\nconsole.log(converter.trytesToAscii('CCTCLDHD'))",
+"var transfers = [{\n    value: 0,\n    address: \'999999999999999999999999999999999999999999999999999999999999999999999999999999999\',\n    message: converter.asciiToTrytes(\'Text\'),\n    tag: \'TAG\'\n}]",
+"async function main(){\r\n    try {\r\n        var trytes         = await iota.prepareTransfers(seed, transfers)\r\n        var tips           = await iota.getTransactionsToApprove(3)\r\n        var attachedTrytes = await iota.attachToTangle(tips.trunkTransaction, tips.branchTransaction, 14, trytes)\r\n                               await iota.storeAndBroadcast(attachedTrytes)\r\n        console.log(\'Transaction sent: https:\/\/thetangle.org\/transaction\/\'+transaction_converter.asTransactionObject(attachedTrytes[0]).hash)\r\n    } catch(e) {\r\n        console.log(e)\r\n    } \r\n}\r\nmain()",
+"var transfers = [{\r\n  value: 2779530283277761,\r\n  address: \'9\'.repeat(81),\r\n  message: converter.asciiToTrytes(\'test\'),\r\n  tag:\'OUTPUT\'\r\n}]\r\nvar options = {\r\n      \'inputs\': [{\r\n            address: core.generateAddress(seed, 0, 1, true),\r\n            keyIndex: 0,\r\n            balance: 2779530283277761,\r\n            security: 1,\r\n            tag: \'INPUT\'\r\n          }]\r\n}\r\niota\r\n  .prepareTransfers(seed, transfers, options)\r\n  .then(trytes => iota.sendTrytes(trytes, 3, 14))\r\n  .then(bundle => {\r\n    console.log(\'Transfer sent: https:\/\/thetangle.org\/transaction\/\'+bundle[0].hash)\r\n  })\r\n  .catch(err => {\r\n    console.log(err)\r\n  })",
+"var transfers = [{value: 0, address: \'9\'.repeat(81)}]\r\nasync function promote(tx, amount){\r\n    try {\r\n        var  trytes         = await iota.prepareTransfers(\'9\'.repeat(81), transfers)\r\n        var tips           = await iota.getTransactionsToApprove(3)\r\n        var attachedTrytes = await iota.attachToTangle(tx, tips.branchTransaction, 14, trytes)\r\n                               await iota.storeAndBroadcast(attachedTrytes)\r\n        console.log(\'Promotetransaction: https:\/\/thetangle.org\/transaction\/\'+transaction_converter.asTransactionObject(attachedTrytes[0]).hash)\r\n        amount--\r\n        if(amount>0){\r\n          promote(transaction_converter.asTransactionObject(attachedTrytes[0]).hash, amount)\r\n        }\r\n    } catch(e) {\r\n        console.log(e)\r\n    } \r\n}\r\n\/\/txhash amount of promotetx\r\npromote(\'txhash\', 3)",
+"async function main(txhash){\r\n    var txObject = await iota.getTransactionObjects([txhash]);\r\n    var bundleObject = await iota.findTransactionObjects({ bundles: [txObject[0].bundle] })\r\n    var tails = [];\r\n    for(let index = 0; index < bundleObject.length; index++){\r\n        if(bundleObject[index].currentIndex == 0){\r\n            tails.push(bundleObject[index].hash)\r\n        }\r\n    }\r\n    iota.getLatestInclusion(tails)\r\n        .then(states => {\r\n            if (states.indexOf(true) === -1) {\r\n                console.log(\'unconfirmed\')\r\n                replay(tails[0])\r\n            } else {\r\n                console.log(\'already confirmed\')\r\n            }\r\n        })\r\n}\r\nfunction replay(tailhash){\r\n    iota.replayBundle(tailhash, 3, 14)\r\n        .then(replayedBundle => console.log(replayedBundle[0].hash))\r\n        .catch(err => console.log(err))\r\n}\r\nmain(\'txhash\')",
+"async function main(txhash){\r\n  var txObject = await iota.getTransactionObjects([txhash]);\r\n  var bundleObject = await iota.findTransactionObjects({ bundles: [txObject[0].bundle] })\r\n  for(let index = 0; index < bundleObject.length; index++){\r\n      if(bundleObject[index].value < 0){\r\n          iota.getBalances([bundleObject[index].address], 100)\r\n          .then(({ balances }) => {\r\n                  if(Math.abs(balances[0])<Math.abs(bundleObject[index].value)){\r\n                    console.log(\'Balance to send: \'+bundleObject[index].value+\', available: \'+balances[0])\r\n                    console.log(\'Not enough balance at \'+bundleObject[index].address)\r\n                  }\r\n          })\r\n          .catch(err => {\r\n              console.log(err)\r\n          })\r\n      }\r\n  }\r\n}\r\n\r\nmain(\'txhash\')",
+""]
+
+showandchange("9", 0)
+showandchange("A", 1)
+showandchange("B", 2)
+showandchange("C", 3)
+showandchange("D", 4)
+showandchange("E", 5)
+showandchange("F", 6)
+showandchange("G", 7)
+showandchange("H", 8)
+showandchange("I", 9)
+//Hover and change
+function showandchange(id, index){
+  let e = document.getElementById(id)
+  e.onmouseover = function(){visible[0]=0;show("input", index)};
+  e.onmouseout = function(){show("input", index)};
+  e.onclick = function(){change("input", index)};
+}
+var inputstorage=''
+var visible=[]
+function show(id, index) {
+  var e = document.getElementById(id);
+    if (visible[index] == 1) {
+      visible[index] = 0
+      e.value = inputstorage
+    } else {
+      inputstorage = e.value
+      e.value = e.value+code[index]+"\n"
+      visible[index] = 1
+    }
+}
+document.getElementById("input").oninput = function(){var e = document.getElementById("input");inputstorage = e.value};
+function change(id, index) {
+  var id = document.getElementById(id);
+  inputstorage+=code[index]+"\n\n"
+  id.value= inputstorage
+  visible[index] = 1
+}
+
+//Code and output
+function doIt() {
+    var headID = document.getElementsByTagName("head")[0];
+    var newScript = document.createElement("script");
+    newScript.type = "text/javascript";
+    newScript.innerHTML = document.getElementById("input").value
+    headID.appendChild(newScript);
+}
+// var realConsoleLog = console.log;
+var log = document.querySelector('.console');
+['log','debug','info','warn','error'].forEach(function (verb) {
+    console[verb] = (function (method, verb, log) {
+        return function () {
+            method.apply(console, arguments);
+            // realConsoleLog.apply(console, arguments);
+            document.getElementById("console").value += JSON.stringify(arguments[0], null, 1)+"\n"
+        };
+    })(console[verb], verb, log);
+});
+</script>
+</body>
+</html>
