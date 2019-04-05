@@ -260,7 +260,7 @@ return new Promise(function(resolve, reject) {
 
   <div class="left">
     <span style="font-size: 15px; margin-top:-50px; float:left;">Predefined: seed = '9'.repeat(81), node = https://nodes.thetangle.org:443</span>
-    <textarea class="input" id="input" spellcheck="false" placeholder="Your Code"></textarea>
+    <textarea class="input" id="input" placeholder="Your Code"></textarea>
       <input type="button" class="button clear" value="Clear input" onclick="document.getElementById('input').value=''" />
       <input type="button" class="button clear" value="Clear output" onclick="document.getElementById('console').value=''" />
       <input type="button" class="button run" value="Run" onclick="doIt();" />
@@ -282,6 +282,7 @@ return new Promise(function(resolve, reject) {
       <div class="fill-div" id="J">check signatures</div>
       <div class="fill-div" id="K">message tx</div>
       <div class="fill-div" id="L">localPoW</div>
+      <div class="fill-div" id="M">searchAddress</div>
     </div>
     
     
@@ -308,6 +309,7 @@ return new Promise(function(resolve, reject) {
     "async function checkSignature(txhash){\r\nvar txObject = await iota.getTransactionObjects([txhash])\r\niota.findTransactionObjects({ bundles: [txObject[0].bundle] })\r\n.then(bundle => {\r\nvar pos = bundle.map(e=>{return e.currentIndex}).indexOf(0)\r\nvar endbundle = [transaction_converter.asTransactionTrytes(bundle[pos])]\r\nfor(let k=0; k<bundle[pos].lastIndex; k++){\r\n    pos = bundle.map(e=>{return e.hash}).indexOf(bundle[pos].trunkTransaction)\r\n    endbundle.push(transaction_converter.asTransactionTrytes(bundle[pos]))\r\n}\r\nvar convertedendbundle = endbundle.map(e=>e=transaction_converter.asTransactionObject(e))\r\nconsole.log('Valid signature: '+bundle_validator.validateBundleSignatures(endbundle))\r\n})\r\n.catch(err => console.log(err))\r\n}\r\ncheckSignature(\'txhash\')",
     "var transfers = [{\r\n  value: 0,\r\n  address: \'ADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADR\',\r\n  message: converter.asciiToTrytes(\'Message\'),\r\n  tag:\'TRYTETAG\'\r\n}]\r\niota\r\n  .prepareTransfers(seed, transfers)\r\n  .then(trytes => iota.sendTrytes(trytes, 3, 14))\r\n  .then(bundle => {\r\n    console.log(\'Transfer sent: https:\/\/thetangle.org\/transaction\/\'+bundle[0].hash)\r\n  })\r\n  .catch(err => {\r\n    console.log(err)\r\n  })",
     "\/\/works only with the attachToTangle command\r\n var curl = window.curl;\r\nvar minWeight = 14;\r\ntry {\r\n\tcurl.init();\r\n  curl.overrideAttachToTangle(iota)\r\n} catch (err){\r\n\tconsole.error(\"Error\", err);\r\n}",
+    "\/\/open the browser console for realtime update\r\nvar seed = \'999999999999999999999999999999999999999999999999999999999999999999999999999999999\'\r\nvar targetAddress = \'AY9BWIUPSA99DUHCSMFVPUBPOZTIBBEJQNKFB9RD9DZSGDDAHJRYFPPDRRIMRMZDXUHPQONDNBFBAUDHDFVVVN9GTA\'\r\nvar startIndex = 0\r\nvar maxIndex = 50\r\nvar secLvl = 2\r\n\r\nconsole.log(`Search targetAddress from Index ${startIndex} to ${maxIndex} `)\r\nsearchAddress()\r\nfunction searchAddress(){\r\n  for(index = startIndex; index<maxIndex; index++){\r\n    let address = core.generateAddress(seed, index, secLvl, false)\r\n    console.log(\"Index \" + index + \": \" + address)\r\n    if(address == targetAddress.slice(0,81)){\r\n      console.log(`targetAddress found at index ${index}`)\r\n      return\r\n    }\r\n  }\r\n}",
     ""]
     
     showandchange("9", 0)
@@ -323,6 +325,7 @@ return new Promise(function(resolve, reject) {
     showandchange("J", 10)
     showandchange("K", 11)
     showandchange("L", 12)
+    showandchange("M", 13)
     //Hover and change
     function showandchange(id, index){
       let e = document.getElementById(id)
