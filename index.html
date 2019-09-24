@@ -180,7 +180,7 @@
       <input type="button" class="button clear" value="Clear input" onclick="document.getElementById('input').value=''" />
       <input type="button" class="button clear" value="Clear output" onclick="document.getElementById('console').value=''" />
       <input type="button" class="button run" value="Run" onclick="doIt();" />
-      <textarea readonly class="console" id="console" placeholder="Output&#10;Open the browser console for errors"></textarea>
+      <textarea readonly class="console" id="console" placeholder="Output"></textarea>
       <span style="font-size: 14px; margin-left:30px;">F12 or Strg+Shift+J for better output</span>
     </div>
     <div class="right">
@@ -274,7 +274,7 @@
         var headID = document.getElementsByTagName("head")[0];
         var newScript = document.createElement("script");
         newScript.type = "text/javascript";
-        newScript.innerHTML = document.getElementById("input").value
+        newScript.innerHTML = 'function executethecode(){\r\ntry{'+document.getElementById("input").value+'}catch(err){console.log(err.message)}}\r\nexecutethecode()'
         headID.appendChild(newScript);
     }
     // var realConsoleLog = console.log;
@@ -284,7 +284,11 @@
             return function () {
                 method.apply(console, arguments);
                 // realConsoleLog.apply(console, arguments);
-                document.getElementById("console").value += JSON.stringify(arguments[0], null, 1)+"\n"
+                if(typeof arguments[0] == "object"){
+                  document.getElementById("console").value += JSON.stringify(arguments[0], null, 1)+"\n"
+                } else{
+                  document.getElementById("console").value += arguments[0]+"\n"
+                }
             };
         })(console[verb], verb, log);
     });
