@@ -9,3 +9,5 @@ global.http_client = require('@iota/http-client');
 global.signing = require('@iota/signing');
 global.transaction_converter = require('@iota/transaction-converter');
 global.transaction = require('@iota/transaction');
+global.cda = require('@iota/cda');
+global.extract_json = require('@iota/extract-json');

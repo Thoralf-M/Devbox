@@ -1,0 +1,36 @@
+{
+  "name": "devbox",
+  "version": "1.0.0",
+  "description": "iota.js snippets",
+  "main": "index.html",
+  "scripts": {
+    "browserify": "browserify iotabrowserify.js --standalone window| uglifyjs > iota.js-browser.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thoralf-M/Devbox.git"
+  },
+  "keywords": [
+    "IOTA"
+  ],
+  "author": "Thoralf-M",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Thoralf-M/Devbox/issues"
+  },
+  "homepage": "https://github.com/Thoralf-M/Devbox#readme",
+  "dependencies": {
+    "@iota/bundle": "^1.0.0-beta.29",
+    "@iota/cda": "^1.0.0-beta.23",
+    "@iota/checksum": "^1.0.0-beta.23",
+    "@iota/converter": "^1.0.0-beta.23",
+    "@iota/core": "^1.0.0-beta.29",
+    "@iota/extract-json": "^1.0.0-beta.23",
+    "@iota/http-client": "^1.0.0-beta.23",
+    "@iota/signing": "^1.0.0-beta.23",
+    "@iota/transaction": "^1.0.0-beta.23",
+    "@iota/transaction-converter": "^1.0.0-beta.23",
+    "browserify": "^16.5.0"
+  }
+}
