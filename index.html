@@ -1,305 +1,337 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Devbox</title>
   <script src="curl.lib.min.js"></script>
   <script src="iota.js-browser.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300" rel="stylesheet">
-<style>
-  
-  #content{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    font-family: 'Nunito Sans', sans-serif;
-    z-index: 0;
-    background:rgb(28, 30, 31);
-    background:rgb(23, 24, 29);
-  }
-  #content-main {
-    flex: 1;
-    display: flex;
-    position: relative;
-    font-size:30px;
-    color:rgb(218, 218, 218);
-  }
-  header{
-    color:rgb(236, 236, 236);
-    font-size:60px;
-    /* padding:10px; */
-    margin-top:-10px;
-    text-align: center;
-  }
-  .title span{
-    position: relative;
-    content: 'Devbox'
-  }
-  .title:hover span{
-    display: none;
-  }
-  .title:hover:after{
-    content: 'Trollbox';
-  }
-  body {
-    margin:0;
-  }
-  .left{
-    text-align:center;
-    margin-top:20px;
-    margin-left:15px;
-    width: 250%;
-  }
-  .input {
-    font-size:16px;
-    width: 97%;
-    height: 550px;
-    overflow:auto; 
-    display:inline-block;
-    color:rgb(202, 202, 202);
-    box-shadow:0 0 3rem 10px #000;
-    padding:1.5rem;
-    border: black;
-    border-radius:8px;
-    background: rgb(29, 30, 31);
-    background:radial-gradient(#132631 10%,#121a1f 90%);
-  }
-  .input:focus{
-    outline: none;
-  }
-  .button{
-    margin-left: 2rem;
-    margin-right: 2rem;
-    color:white;
-    padding-left:2rem;
-    padding-right:2rem;
-    padding-top:1rem;
-    padding-bottom:1rem;
-    border-radius:6px;
-    border:none;
-    transition: .25s;
-    box-shadow:0 0 1rem#000;
-    outline:0;
-  }
-  .button:hover{
-    transform:translateY(1px);
-  }
-  .run{
-    background:radial-gradient(#132631 10%,#121a1f 90%);
-  }
-  .run:hover {
-    background:radial-gradient(#1d4c68 10%,#062538 90%);
-    color: black;
-  }
-  .clear{
-    background:radial-gradient(#411b1b 10%,#271313 90%);
-  }
-  .clear:hover {
-    background:radial-gradient(#5e1e1e 10%,#270d0d 90%);
-    color: black;
-  }
-  .console{
-    font-size:16px;
-    width: 97%;
-    height: 500px;
-    margin-top:20px;
-    box-shadow:0 0 3rem 10px #000;
-    padding:1.5rem;
-    color:rgb(202, 202, 202);
-    border: black;
-    border-radius:8px;
-    display:inline-block;
-    overflow:auto;
-    background:radial-gradient(#411b1b 10%,#271313 90%);
-  }
-  .console:focus{
-    outline: none;
-  }
-  .right{
-    margin-left:40px;
-    margin-right:20px;
-    margin-top:10px;
-    margin-bottom: 30px;
-    word-break: break-word;
-  }
-  .fill-div{
-    margin:10px;
-    overflow:auto; 
-    display:inline-block;
-    color:rgb(209, 209, 209);
-    text-decoration: none;
-    text-align: center;
-    box-shadow:0 0 3rem 10px #000;
-    padding:1.5rem;
-    border-radius:8px;
-    transition:.3s;
-    background: rgb(29, 30, 31);
-  }
-  .fill-div:hover{
-    transform:translateY(-5px);
-    color:rgb(224, 224, 224);
-    background:#111111;
-    /* background:radial-gradient(#343d42 30%,#1e1e1f 90%); */
-  }
-  footer{
-    position: absolte;
-    bottom: 0;
-    color:#919191;
-    width:100%;
-    height: 100px;
-    text-align: center;
-    z-index: 1;
-    background: radial-gradient(ellipse at bottom,#25437caf,transparent 50%);
-  }
-  ::-webkit-scrollbar {
-    background-color: #1b1c21;
-    color: #c4c0ba;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #252a33;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #32373f;
-  }
-  ::-webkit-scrollbar-thumb:active {
-    background-color: #293341;
-  }
-  ::-webkit-scrollbar-corner {
-    background-color: #252a33;
-  }
-</style>
+  <style>
+    #content {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'Nunito Sans', sans-serif;
+      z-index: 0;
+      background: rgb(28, 30, 31);
+      background: rgb(23, 24, 29);
+    }
+
+    #content-main {
+      flex: 1;
+      display: flex;
+      position: relative;
+      font-size: 30px;
+      color: rgb(218, 218, 218);
+    }
+
+    header {
+      color: rgb(236, 236, 236);
+      font-size: 60px;
+      /* padding:10px; */
+      margin-top: -10px;
+      text-align: center;
+    }
+
+    .title span {
+      position: relative;
+      content: 'Devbox'
+    }
+
+    .title:hover span {
+      display: none;
+    }
+
+    .title:hover:after {
+      content: 'Trollbox';
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .left {
+      text-align: center;
+      margin-top: 20px;
+      margin-left: 15px;
+      width: 250%;
+    }
+
+    .input {
+      font-size: 16px;
+      width: 97%;
+      height: 550px;
+      overflow: auto;
+      display: inline-block;
+      color: rgb(202, 202, 202);
+      box-shadow: 0 0 3rem 10px #000;
+      padding: 1.5rem;
+      border: black;
+      border-radius: 8px;
+      background: rgb(29, 30, 31);
+      background: radial-gradient(#132631 10%, #121a1f 90%);
+    }
+
+    .input:focus {
+      outline: none;
+    }
+
+    .button {
+      margin-left: 2rem;
+      margin-right: 2rem;
+      color: white;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border-radius: 6px;
+      border: none;
+      transition: .25s;
+      box-shadow: 0 0 1rem#000;
+      outline: 0;
+    }
+
+    .button:hover {
+      transform: translateY(1px);
+    }
+
+    .run {
+      background: radial-gradient(#132631 10%, #121a1f 90%);
+    }
+
+    .run:hover {
+      background: radial-gradient(#1d4c68 10%, #062538 90%);
+      color: black;
+    }
+
+    .clear {
+      background: radial-gradient(#411b1b 10%, #271313 90%);
+    }
+
+    .clear:hover {
+      background: radial-gradient(#5e1e1e 10%, #270d0d 90%);
+      color: black;
+    }
+
+    .console {
+      font-size: 16px;
+      width: 97%;
+      height: 500px;
+      margin-top: 20px;
+      box-shadow: 0 0 3rem 10px #000;
+      padding: 1.5rem;
+      color: rgb(202, 202, 202);
+      border: black;
+      border-radius: 8px;
+      display: inline-block;
+      overflow: auto;
+      background: radial-gradient(#411b1b 10%, #271313 90%);
+    }
+
+    .console:focus {
+      outline: none;
+    }
+
+    .right {
+      margin-left: 40px;
+      margin-right: 20px;
+      margin-top: 10px;
+      margin-bottom: 30px;
+      word-break: break-word;
+    }
+
+    .fill-div {
+      margin: 10px;
+      overflow: auto;
+      display: inline-block;
+      color: rgb(209, 209, 209);
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 0 3rem 10px #000;
+      padding: 1.5rem;
+      border-radius: 8px;
+      transition: .3s;
+      background: rgb(29, 30, 31);
+    }
+
+    .fill-div:hover {
+      transform: translateY(-5px);
+      color: rgb(224, 224, 224);
+      background: #111111;
+      /* background:radial-gradient(#343d42 30%,#1e1e1f 90%); */
+    }
+
+    footer {
+      position: absolte;
+      bottom: 0;
+      color: #919191;
+      width: 100%;
+      height: 100px;
+      text-align: center;
+      z-index: 1;
+      background: radial-gradient(ellipse at bottom, #25437caf, transparent 50%);
+    }
+
+    ::-webkit-scrollbar {
+      background-color: #1b1c21;
+      color: #c4c0ba;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #252a33;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #32373f;
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+      background-color: #293341;
+    }
+
+    ::-webkit-scrollbar-corner {
+      background-color: #252a33;
+    }
+  </style>
 </head>
+
 <body>
-<div id="content">
-<header><span class="title"><span>Devbox</span></span></header>
-<main id="content-main">
+  <div id="content">
+    <header><span class="title"><span>Devbox</span></span></header>
+    <main id="content-main">
 
-  <div class="left">
-    <span style="font-size: 15px; margin-top:-50px; float:left;">Predefined: seed = '9'.repeat(81), node = https://nodes.thetangle.org:443</span>
-    <textarea class="input" id="input" placeholder="Your Code"></textarea>
-      <input type="button" class="button clear" value="Clear input" onclick="document.getElementById('input').value=''" />
-      <input type="button" class="button clear" value="Clear output" onclick="document.getElementById('console').value=''" />
-      <input type="button" class="button run" value="Run" onclick="doIt();" />
-      <textarea readonly class="console" id="console" placeholder="Output"></textarea>
-      <span style="font-size: 14px; margin-left:30px;">F12 or Strg+Shift+J for better output</span>
-    </div>
-    <div class="right">
-      <a href="https://github.com/iotaledger/iota.js/blob/next/api_reference.md" target="_blank" rel="noopener" style="font-size: 20px; margin-top:-50px; float:right; color:rgb(138, 193, 255)">api reference</a>
-      <div class="fill-div" id="0">provider</div>
-      <div class="fill-div" id="1">getNodeInfo</div>
-      <div class="fill-div" id="2">generateAddress</div>
-      <div class="fill-div" id="3">convertText</div>
-      <div class="fill-div" id="4">detailed tx</div>
-      <div class="fill-div" id="5">value tx</div>
-      <div class="fill-div" id="6">promote</div>
-      <div class="fill-div" id="7">reattach</div>
-      <div class="fill-div" id="8">check inputs</div>
-      <div class="fill-div" id="9">check signatures</div>
-      <div class="fill-div" id="10">message tx</div>
-      <div class="fill-div" id="11">localPoW</div>
-      <div class="fill-div" id="12">searchAddress</div>
-      <div class="fill-div" id="13">usePrivatekey</div>
-      <div class="fill-div" id="14">getBalance</div>
-      <div class="fill-div" id="15">seedpuzzle</div>
-      <div class="fill-div" id="16">indexZeroSeed</div>
-      <div class="fill-div" id="17">send all iotas</div>
-      <div class="fill-div" id="18">get seed balance</div>
-      <div class="fill-div" id="19">cda converter</div>
-      <div class="fill-div" id="20">fetch message</div>
-      <div class="fill-div" id="21">send txobjects</div>
+      <div class="left">
+        <span style="font-size: 15px; margin-top:-50px; float:left;">Predefined: seed = '9'.repeat(81), node =
+          https://nodes.thetangle.org:443</span>
+        <textarea class="input" id="input" placeholder="Your Code"></textarea>
+        <input type="button" class="button clear" value="Clear input"
+          onclick="document.getElementById('input').value=''" />
+        <input type="button" class="button clear" value="Clear output"
+          onclick="document.getElementById('console').value=''" />
+        <input type="button" class="button run" value="Run" onclick="doIt();" />
+        <textarea readonly class="console" id="console" placeholder="Output"></textarea>
+        <span style="font-size: 14px; margin-left:30px;">F12 or Strg+Shift+J for better output</span>
+      </div>
+      <div class="right">
+        <a href="https://github.com/iotaledger/iota.js/blob/next/api_reference.md" target="_blank" rel="noopener"
+          style="font-size: 20px; margin-top:-50px; float:right; color:rgb(138, 193, 255)">api reference</a>
+        <div class="fill-div" id="0">provider</div>
+        <div class="fill-div" id="1">getNodeInfo</div>
+        <div class="fill-div" id="2">generateAddress</div>
+        <div class="fill-div" id="3">convertText</div>
+        <div class="fill-div" id="4">detailed tx</div>
+        <div class="fill-div" id="5">value tx</div>
+        <div class="fill-div" id="6">promote</div>
+        <div class="fill-div" id="7">reattach</div>
+        <div class="fill-div" id="8">check inputs</div>
+        <div class="fill-div" id="9">check signatures</div>
+        <div class="fill-div" id="10">message tx</div>
+        <div class="fill-div" id="11">localPoW</div>
+        <div class="fill-div" id="12">searchAddress</div>
+        <div class="fill-div" id="13">usePrivatekey</div>
+        <div class="fill-div" id="14">getBalance</div>
+        <div class="fill-div" id="15">seedpuzzle</div>
+        <div class="fill-div" id="16">indexZeroSeed</div>
+        <div class="fill-div" id="17">send all iotas</div>
+        <div class="fill-div" id="18">get seed balance</div>
+        <div class="fill-div" id="19">cda converter</div>
+        <div class="fill-div" id="20">fetch message</div>
+        <div class="fill-div" id="21">send txobjects</div>
 
-    </div>
-    
-    
+      </div>
+
+
     </main>
     <footer>Made by Thoralf</footer>
-    </div>
-    <script>
+  </div>
+  <script>
     var iota = core.composeAPI({
       provider: 'https://nodes.thetangle.org:443'
     })
-    var seed= '9'.repeat(81)
-    
-    
-    var code= ['var iota = core.composeAPI({\n      provider: \'https://nodes.thetangle.org:443\'\n})',
+    var seed = '9'.repeat(81)
+
+
+    var code = ['var iota = core.composeAPI({\n      provider: \'https://nodes.thetangle.org:443\'\n})',
       'iota.getNodeInfo()\n    .then(info => console.log(info))\n    .catch(error => {\n        console.log(`Request error: ${error.message}`)\n})',
-    '//seed, index, seclvl, checksum\nconsole.log(core.generateAddress(seed, 0, 2, true))',
-    "console.log(converter.asciiToTrytes('Text'))\nconsole.log(converter.trytesToAscii('CCTCLDHD'))",
-    "var transfers = [{\r\n    value: 0,\r\n    address: \'9\'.repeat(81),\r\n}]\nasync function main(){\r\n    try {\r\n        var trytes         = await iota.prepareTransfers(seed, transfers)\r\n        var tips           = await iota.getTransactionsToApprove(3)\r\n        var attachedTrytes = await iota.attachToTangle(tips.trunkTransaction, tips.branchTransaction, 14, trytes)\r\n                               await iota.storeAndBroadcast(attachedTrytes)\r\n        console.log(\'Transaction sent: https:\/\/thetangle.org\/transaction\/\'+transaction_converter.asTransactionObject(attachedTrytes[0]).hash)\r\n    } catch(e) {\r\n        console.log(e)\r\n    } \r\n}\r\nmain()",
-    "var transfers = [{\r\n  value: 2779530283277761,\r\n  address: \'9\'.repeat(81),\r\n  message: converter.asciiToTrytes(\'test\'),\r\n  tag:\'OUTPUT\'\r\n}]\r\nvar options = {\r\n      \'inputs\': [{\r\n            address: core.generateAddress(seed, 0, 1, true),\r\n            keyIndex: 0,\r\n            balance: 2779530283277761,\r\n            security: 1,\r\n            tag: \'INPUT\'\r\n          }]\r\n}\r\niota\r\n  .prepareTransfers(seed, transfers, options)\r\n  .then(trytes => iota.sendTrytes(trytes, 3, 14))\r\n  .then(bundle => {\r\n    console.log(\'Transfer sent: https:\/\/thetangle.org\/transaction\/\'+bundle[0].hash)\r\n  })\r\n  .catch(err => {\r\n    console.log(err)\r\n  })",
-    "var transfers = [{ value: 0, address: \'9\'.repeat(81) }]\r\nasync function promote(txhash, amount) {\r\n  try {\r\n    let trytes = await iota.prepareTransfers(\'9\'.repeat(81), transfers)\r\n    if (amount % 2 == 0) {\r\n      tips = await iota.getTransactionsToApprove(3)\r\n      attachedTrytes = await iota.attachToTangle(txhash, tips.branchTransaction, 14, trytes)\r\n    } else {\r\n      if (typeof tips == \'undefined\') {\r\n        tips = await iota.getTransactionsToApprove(3)\r\n      }\r\n      attachedTrytes = await iota.attachToTangle(txhash, tips.trunkTransaction, 14, trytes)\r\n    }\r\n    await iota.storeAndBroadcast(attachedTrytes)\r\n    console.log(\'Promotetx: https:\/\/thetangle.org\/transaction\/\' + transaction_converter.asTransactionObject(attachedTrytes[0]).hash)\r\n    amount--\r\n    if (amount > 0) {\r\n      promote(txhash, amount)\r\n    }\r\n  } catch (e) {\r\n    console.log(e)\r\n  }\r\n}\r\n\/\/tailhash, amount\r\npromote(\'txhash\', 2)",    "async function main(txhash){\r\n    var txObject = await iota.getTransactionObjects([txhash]);\r\n    var bundleObject = await iota.findTransactionObjects({ bundles: [txObject[0].bundle] })\r\n    var tails = [];\r\n    for(let index = 0; index < bundleObject.length; index++){\r\n        if(bundleObject[index].currentIndex == 0){\r\n            tails.push(bundleObject[index].hash)\r\n        }\r\n    }\r\n    iota.getLatestInclusion(tails)\r\n        .then(states => {\r\n            if (states.indexOf(true) === -1) {\r\n                console.log(\'unconfirmed\')\r\n                replay(tails[0])\r\n            } else {\r\n                console.log(\'already confirmed\')\r\n            }\r\n        })\r\n}\r\nfunction replay(tailhash){\r\n    iota.replayBundle(tailhash, 3, 14)\r\n        .then(replayedBundle => console.log(replayedBundle[0].hash))\r\n        .catch(err => console.log(err))\r\n}\r\nmain(\'txhash\')",
-    "async function main(txhash){\r\n  var txObject = await iota.getTransactionObjects([txhash]);\r\n  var bundleObject = await iota.findTransactionObjects({ bundles: [txObject[0].bundle] })\r\n  for(let index = 0; index < bundleObject.length; index++){\r\n      if(bundleObject[index].value < 0){\r\n          iota.getBalances([bundleObject[index].address], 100)\r\n          .then(({ balances }) => {\r\n                  if(Math.abs(balances[0])<Math.abs(bundleObject[index].value)){\r\n                    console.log(\'Balance to send: \'+bundleObject[index].value+\', available: \'+balances[0])\r\n                    console.log(\'Not enough balance at \'+bundleObject[index].address)\r\n                  }\r\n          })\r\n          .catch(err => {\r\n              console.log(err)\r\n          })\r\n      }\r\n  }\r\n}\r\n\r\nmain(\'txhash\')",
-    "async function checkSignature(txhash) {\r\n  var txObject = await iota.getTransactionObjects([txhash])\r\n  iota.findTransactionObjects({ bundles: [txObject[0].bundle] })\r\n    .then(bundle => {\r\n      bundle.sort(function (a, b) {\r\n        return a.currentIndex - b.currentIndex;\r\n      });\r\n      console.log(\'Valid signature: \' + bundle_validator.default(bundle))\r\n    })\r\n    .catch(err => console.log(err))\r\n}\r\n\r\ncheckSignature(\'txhash\')",
-    "var transfers = [{\r\n  value: 0,\r\n  address: \'ADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADR\',\r\n  message: converter.asciiToTrytes(\'Message\'),\r\n  tag:\'TRYTETAG\'\r\n}]\r\niota\r\n  .prepareTransfers(seed, transfers)\r\n  .then(trytes => iota.sendTrytes(trytes, 3, 14))\r\n  .then(bundle => {\r\n    console.log(\'Transfer sent: https:\/\/thetangle.org\/transaction\/\'+bundle[0].hash)\r\n  })\r\n  .catch(err => {\r\n    console.log(err)\r\n  })",
-    "var iota = core.composeAPI({\r\n      provider: \'https:\/\/nodes.thetangle.org:443\',\r\n      attachToTangle: curl.localPoW\r\n})",
-    "\/\/open the browser console for realtime update\r\nvar seed = \'999999999999999999999999999999999999999999999999999999999999999999999999999999999\'\r\nvar targetAddress = \'AY9BWIUPSA99DUHCSMFVPUBPOZTIBBEJQNKFB9RD9DZSGDDAHJRYFPPDRRIMRMZDXUHPQONDNBFBAUDHDFVVVN9GTA\'\r\nvar startIndex = 0\r\nvar maxIndex = 50\r\nvar secLvl = 2\r\n\r\nconsole.log(`Search targetAddress from Index ${startIndex} to ${maxIndex} `)\r\nsearchAddress()\r\nfunction searchAddress(){\r\n  for(index = startIndex; index<maxIndex; index++){\r\n    let address = core.generateAddress(seed, index, secLvl, false)\r\n    console.log(\"Index \" + index + \": \" + address)\r\n    if(address == targetAddress.slice(0,81)){\r\n      console.log(`targetAddress found at index ${index}`)\r\n      return\r\n    }\r\n  }\r\n}",
-    "\/\/privatkey for security level 2\r\nasync function main() {\r\n  try {\r\n    let key = converter.trytesToTrits(\'GRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOK\')\r\n    let digests = signing.digests(key)\r\n    let inputAddress = converter.tritsToTrytes(signing.address(digests))\r\n    let targetAddress = \'GRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPEC\'\r\n    let remainderAddress = \'GRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPEC\'\r\n\r\n    let issuanceTimestamp = converter.valueToTrits(Math.floor(Date.now() \/ 1000))\r\n\r\n    let transfers = [{\r\n      address: targetAddress,\r\n      value: 0,\r\n      issuanceTimestamp\r\n    }, {\r\n      address: inputAddress,\r\n      value: 0,\r\n      issuanceTimestamp\r\n    }, {\r\n      address: inputAddress,\r\n      value: 0,\r\n      issuanceTimestamp\r\n    }, {\r\n      address: remainderAddress,\r\n      value: 0,\r\n      issuanceTimestamp\r\n    }]\r\n\r\n    await iota.getBalances([inputAddress], 100)\r\n      .then(({ balances }) => {\r\n        \/\/ transfers[1].value = balances[0] * (-1)\r\n        \/\/ transfers[0].value = balances[0]\r\n        transfers[1].value = -10\r\n        transfers[0].value = 10\r\n        console.log(\"Balance: \" + balances[0]);\r\n      })\r\n      .catch(err => {\r\n        console.log(err)\r\n      })\r\n    transfers.map(t => t.address = converter.trytesToTrits(t.address))\r\n    transfers.map(t => t.value = converter.trytesToTrits(t.value))\r\n    let createBundle = bundle.createBundle(transfers)\r\n    let finalizedBundle = bundle.finalizeBundle(createBundle)\r\n    let finalizedBundleTrytes = []\r\n    for (let offset = 0; offset < finalizedBundle.length; offset += 8019) {\r\n      finalizedBundleTrytes.push(converter.tritsToTrytes(finalizedBundle.subarray(offset, offset + 8019)))\r\n    }\r\n    let finalizedBundleObjects = finalizedBundleTrytes.map(tx => transaction_converter.asTransactionObject(tx))\r\n    let finalizedBundleHash = finalizedBundleObjects[0].bundle\r\n    let normalizedBundleHash = signing.normalizedBundle(converter.trytesToTrits(finalizedBundleHash))\r\n    let signatureFragmentOne = converter.tritsToTrytes(signing.signatureFragment(normalizedBundleHash, key))\r\n    let signatureFragmentTwo = converter.tritsToTrytes(signing.signatureFragment(normalizedBundleHash.slice(27, 54), key.slice(6561, 13122)))\r\n    finalizedBundleObjects[1].signatureMessageFragment = signatureFragmentOne.slice(0, 2187)\r\n    finalizedBundleObjects[2].signatureMessageFragment = signatureFragmentTwo.slice(0, 2187)\r\n    console.log(\'Valid signature: \' + bundle_validator.default(finalizedBundleObjects))\r\n    if (bundle_validator.default(finalizedBundleObjects)) {\r\n      let finalTrytes = finalizedBundleObjects.map(e => transaction_converter.asTransactionTrytes(e))\r\n      let tips = await iota.getTransactionsToApprove(3)\r\n      let attachedTrytes = await iota.attachToTangle(tips.trunkTransaction, tips.branchTransaction, 14, finalTrytes.reverse())\r\n      await iota.storeAndBroadcast(attachedTrytes)\r\n      console.log(\'Transaction sent: https:\/\/thetangle.org\/transaction\/\' + transaction_converter.asTransactionObject(attachedTrytes[0]).hash)\r\n    } else {\r\n      console.log(\'Invalid Bundle\');\r\n    }\r\n\r\n  } catch (e) {\r\n    console.log(e)\r\n  }\r\n}\r\n\r\nmain()",
-    "iota.getBalances([\'999999999999999999999999999999999999999999999999999999999999999999999999999999999\'], 100)\r\n          .then(({ balances }) => {\r\n                    console.log(\'Balance: \'+balances[0]+\'i\')\r\n          })\r\n          .catch(err => {\r\n              console.log(err)\r\n          })",
-    "var permArr = []\r\nvar usedChars = []\r\n\r\nvar permutations = permute([\'GRL\', \'EGO\'])\r\n\/\/0 = permutations placeholder \r\nvar fixedOrder = [\'WTEDOROFS\', 0, \'OHLCDYJMJULRMIXFSTSFSULWJPEGTRAHRWRHWOAXTO9SHHZMNMFGRBPUHFVNEFD\', 0, \'JFR\']\r\n\r\nvar targetAddress = \'ICXTBZHXTPSNMSAKPFGRGVWHSVY9OTUIA9SSDUGUOOCCLPGNUCKJUFUOFHENTNREEPOPLJXQROHXEGRJBJPANMGVMW\'\r\n\r\nmain()\r\nasync function main() {\r\n  try {\r\n    var seedlist = []\r\n    for (let l = 0; l < permutations.length; l++) {\r\n      let placeholder = []\r\n      let placeholderFixed = [...fixedOrder]\r\n\r\n      for (let u = 0; u < placeholderFixed.length; u++) {\r\n        if (placeholderFixed[u] == 0) {\r\n          placeholderFixed[u] = permutations[l].shift()\r\n        }\r\n        placeholder.push(placeholderFixed[u])\r\n      }\r\n      seedlist.push(placeholder.join(\'\'))\r\n    }\r\n    if (seedlist[0].length != 81) {\r\n      throw new Error(\"Seed zu kurz\");\r\n    }\r\n    console.log(seedlist)\r\n\r\n    for (let k = 0; k < seedlist.length; k++) {\r\n      await new Promise(resolve => setTimeout(resolve, 500));\r\n      sendfromSeed(seedlist[k])\r\n    }\r\n  } catch (e) {\r\n    console.log(e)\r\n  }\r\n}\r\n\r\nasync function sendfromSeed(seed) {\r\n  try {\r\n    let addressArray = []\r\n    addressArray.push(core.generateAddress(seed, 0, 2, true))\r\n    \/\/ addressArray.push(core.generateAddress(seed, 1, 2, true))\r\n    \/\/ addressArray.push(core.generateAddress(seed, 3, 2, true))\r\n    let balancedata = await iota.getBalances(addressArray, 100)\r\n    let finalbalance = 0\r\n    balancedata.balances.forEach(e => {\r\n      finalbalance += e\r\n    })\r\n    console.log(finalbalance);\r\n    if (finalbalance == 0) {\r\n      return\r\n    }\r\n    let transfers = [{\r\n      address: targetAddress,\r\n      value: finalbalance\r\n    }]\r\n    let trytes = await iota.prepareTransfers(seed, transfers)\r\n    let bundle = await iota.sendTrytes(trytes, 3, 14)\r\n    console.log(`https:\/\/thetangle.org\/transaction\/${bundle[0].hash}`)\r\n  } catch (e) {\r\n    console.log(e)\r\n  }\r\n}\r\n\r\nfunction permute(input) {\r\n  var i, ch;\r\n  for (i = 0; i < input.length; i++) {\r\n    ch = input.splice(i, 1)[0];\r\n    usedChars.push(ch);\r\n    if (input.length == 0) {\r\n      permArr.push(usedChars.slice());\r\n    }\r\n    permute(input);\r\n    input.splice(i, 0, ch);\r\n    usedChars.pop();\r\n  }\r\n  return permArr\r\n}",
-    "var seed = \'JWZCMYEVYUSWUFBCNSZWIYOETPTZAJNWIABY9VJCLQJGTKFFWWWOZXCEUCRSGGTFRPSQCGRSJOQOBBE9C\'\r\nvar addressIndex = 325\r\n\r\nvar newseed = indexZeroSeed(seed, addressIndex)\r\nconsole.log(\"Old seed: \"+seed)\r\nconsole.log(\"New seed: \"+newseed)\r\n\r\nconsole.log(\"Old \"+core.generateAddress(seed, addressIndex, 2, true))\r\nconsole.log(\"New \"+core.generateAddress(newseed, 0, 2, true))\r\n\r\n\/\/returns seed with the address at index 0\r\n\/\/limited to low values and doesn\'t work with all seeds\r\nfunction indexZeroSeed(seed, addressIndex) {\r\n\tlet value = converter.tritsToValue(converter.trytesToTrits(seed.slice(0, 8)))\r\n\tvalue+=addressIndex\r\n\tlet newTrytes = converter.tritsToTrytes(converter.valueToTrits(value))\r\n\tnewTrytes+=\'9\'.repeat(8)\r\n  let newSeed = newTrytes.slice(0, 8)+seed.slice(8)\r\n  let addressOld = core.generateAddress(seed, addressIndex, 2, true)\r\n  let addressNew = core.generateAddress(newSeed, 0, 2, true)\r\n  if(addressOld != addressNew){\r\n    console.log(\"Didn\'t work\")\r\n  } else {\r\n    return newSeed\r\n  }\r\n}",
-    "var seed = \'TROLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLL\'\r\n\/\/address with checksum (90 trytes), iotas will be moved to this address\r\nlet destination_address = \'ONDFXGQGUVCXPHUJPHT9HJXDJU99ZJQX9WT9PGKRDFXWGHTYEEUJKEMFEBTKS9KJFBFSRWNRYFO9JSNSYRFAPLEUV9\'\r\n\/\/address options\r\nlet sec_lvl = 2\r\nlet start_index = 0\r\nlet end_index = 9\r\n\r\nasync function send_all_iotas(seed, destination_address, sec_lvl, start_index, end_index) {\r\n  try {\r\n    if (!checksum.isValidChecksum(destination_address)) {\r\n      console.error(\"Invalid destination_address\");\r\n      return\r\n    }\r\n\r\n    let addresses = generate_addresses(seed, sec_lvl, start_index, end_index)\r\n    \/\/ console.log(addresses);\r\n    let balances = await addresses_with_balance(addresses)\r\n    \/\/ console.log(balances);\r\n    let total_balance = balances.reduce((a, b) => {\r\n      return a + b;\r\n    })\r\n\r\n    if (total_balance <= 0) {\r\n      console.error(\"No iotas found\");\r\n      return\r\n    }\r\n\r\n    let transfers = [{\r\n      value: total_balance,\r\n      address: destination_address\r\n    }]\r\n\r\n    let options = {\r\n      \'inputs\': []\r\n    }\r\n\r\n    for (let k = 0; k < balances.length; k++) {\r\n      if (balances[k] > 0) {\r\n        options.inputs.push({\r\n          address: addresses[k],\r\n          keyIndex: k+start_index,\r\n          balance: balances[k],\r\n          security: sec_lvl\r\n        })\r\n      }\r\n    }\r\n\r\n    let trytes = await iota.prepareTransfers(seed, transfers, options)\r\n    let bundle = await iota.sendTrytes(trytes, 3, 14)\r\n    console.log(\'Transfer sent: https:\/\/thetangle.org\/transaction\/\' + bundle[0].hash)\r\n\r\n  } catch (err) {\r\n    console.error(err)\r\n  }\r\n}\r\n\r\nasync function addresses_with_balance(addresses) {\r\n  let res = await iota.getBalances(addresses, 100)\r\n  return res.balances\r\n}\r\n\r\nfunction generate_addresses(seed, sec_lvl, start_index, end_index) {\r\n  let addresses = []\r\n  for (let index = start_index; index < end_index + 1; index++) {\r\n    addresses.push(core.generateAddress(seed, index, sec_lvl, false))\r\n  }\r\n  return addresses\r\n}\r\n\r\nsend_all_iotas(seed, destination_address, sec_lvl, start_index, end_index)",
-    "var seed = \'TROLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLL\'\r\n\r\n\/\/address options\r\nlet sec_lvl = 2\r\nlet start_index = 0\r\nlet end_index = 9\r\n\r\nasync function getBalance(seed, sec_lvl, start_index, end_index) {\r\n  try {\r\n    let addresses = generate_addresses(seed, sec_lvl, start_index, end_index)\r\n    console.log(addresses)\r\n    let balances = await iota.getBalances(addresses, 100)\r\n    let total_balance = balances.balances.reduce((a, b) => {\r\n      return a + b;\r\n    })\r\n    console.log(\'Balance: \' + total_balance )\r\n\r\n  } catch (err) {\r\n    console.error(err)\r\n  }\r\n}\r\n\r\nfunction generate_addresses(seed, sec_lvl, start_index, end_index) {\r\n  let addresses = []\r\n  for (let index = start_index; index < end_index + 1; index++) {\r\n    addresses.push(core.generateAddress(seed, index, sec_lvl, false))\r\n  }\r\n  return addresses\r\n}\r\n\r\ngetBalance(seed, sec_lvl, start_index, end_index)",
-    "let address = \'UMSQVDTVQQSNCV9PUVN99VLD9BJHRUFILEC9DNZNWHAYYEHUSXUQIAZSDF9BSTIWM9TCB9FLBYEZQQGRXDD9BWWMDH\'\r\n\r\nmain()\r\nfunction main() {\r\n  let cda = generateCDA(address)\r\n  console.log(cda)\r\n  let addressWithChecksum = getAddressWithChecksum(cda)\r\n  console.log(\"Address: \" + addressWithChecksum)\r\n\r\n  \/\/add message\r\n  cda.message = \'Test message\'\r\n  \/\/add receiver\r\n  cda.receiver = \'Not spark wallet :carlos:\'\r\n  let sparkLink = generateSparkLink(cda)\r\n  console.log(sparkLink);\r\n  console.log(\"Address: \" + getAdressFromSparkLink(sparkLink));\r\n}\r\n\r\nfunction generateCDA(address) {\r\n  let timeoutAt = Math.floor(Date.now() \/ 1000 + 24 * 60 * 60)\r\n  let multiUse = false\r\n  let expectedAmount = 1\r\n  let checksum = converter.tritsToTrytes(cda.CDAChecksum(converter.trytesToTrits(address), converter.valueToTrits(timeoutAt), cda.CDAMultiUseBooleanAsTrit(multiUse), converter.valueToTrits(expectedAmount || 0)))\r\n  let addressWithCDAChecksum = address.slice(0, 81) + checksum\r\n  let newCDA = { address: addressWithCDAChecksum, timeoutAt, multiUse, expectedAmount }\r\n  cda.verifyCDAChecksum(newCDA)\r\n  return newCDA\r\n}\r\n\r\nfunction getAddressWithChecksum(cda) {\r\n  return checksum.addChecksum(cda.address.slice(0, 81))\r\n}\r\n\r\nfunction generateSparkLink(cda) {\r\n  let { address, timeoutAt, message, expectedAmount, receiver } = cda\r\n  let link = \'https:\/\/spark.iota.org\/?address=\' + address + \'&timeoutAt=\' + timeoutAt + \'&amount=\' + expectedAmount\r\n  if (typeof message != \'undefined\') {\r\n    link += \'&message=\' + message.replace(\/ \/g, \"%20\")\r\n  }\r\n  if (typeof message != \'undefined\') {\r\n    link += \'&receiver=\' + receiver.replace(\/ \/g, \"%20\")\r\n  }\r\n  return link\r\n}\r\n\r\nfunction getAdressFromSparkLink(link) {\r\n  return checksum.addChecksum(link.slice(32, 113))\r\n}",
-    "fetchMessage(\'PDZ9XWAK9MIQARXUZJ9DRBDGSYPMOYQE9TZD9RVZYTCOHZORJFBYTZKWZONDWLVNBEDYCWDYMVSU99999\')\r\n\r\nasync function fetchMessage(tailHash) {\r\n  try {\r\n    let bundle = await iota.getBundle(tailHash)\r\n    let msgTrytes = \'\';\r\n    bundle.map(e => msgTrytes += e.signatureMessageFragment)\r\n    let msg = converter.trytesToAscii(remove_nines(msgTrytes))\r\n    console.log(msg)\r\n  } catch (err) {\r\n    console.log(err);\r\n  }\r\n\r\n}\r\n\r\nfunction remove_nines(trytes) {\r\n  let endposition = trytes.length;\r\n  if (trytes.length % 2 != 0) {\r\n    trytes = trytes.slice(0, -1)\r\n  }\r\n  for (let j = 0; j < trytes.length; j += 2) {\r\n    if (trytes.slice(j, j + 2) == \'99\') {\r\n      endposition = j;\r\n      break;\r\n    }\r\n  }\r\n  return trytes.slice(0, endposition)\r\n}",
-    "let txobjects = [\r\n  {\r\n    \"hash\": \"BRHD9LBIFWRFRKJWIPQUBY9QCBWYNGDL9QOSAGMSHW9K9MMSZEFMMAWVAARABBUHOPQTGQQIRXO9Z9999\",\r\n    \"signatureMessageFragment\": \"YBBDTC999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\",\r\n    \"address\": \"ADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADR\",\r\n    \"value\": 0,\r\n    \"obsoleteTag\": \"WUYTETAG9999999999999999999\",\r\n    \"timestamp\": 1577968610,\r\n    \"currentIndex\": 0,\r\n    \"lastIndex\": 1,\r\n    \"bundle\": \"RFKGXHFLDLJWZBTQQLNGZJHCWZYYVIQJOAGTLBOWSZZAVOBIPKHHLNTEXGIGIBFACTNOFLHQWIRPJJKXY\",\r\n    \"trunkTransaction\": \"OOWAVVE9MJRJPBGAJNJGRWYFPXKJEJLEICGT9DQFTRCPLNPXXRHKPEXRNXMZZIONYHKTFVQDSAMHA9999\",\r\n    \"branchTransaction\": \"AWINHKJ9LLWEJTNF9NUQFCHSTRXXIPONTKMLWUNGLXNHZPQWJJEESCCTXIOKOANEFMWXDTHSRSAZA9999\",\r\n    \"tag\": \"TRYTETAG9999999999999999999\",\r\n    \"attachmentTimestamp\": 1577968611108,\r\n    \"attachmentTimestampLowerBound\": 0,\r\n    \"attachmentTimestampUpperBound\": 3812798742493,\r\n    \"nonce\": \"ZBYPFYBR9PLVPFEGARAGRSU9OTS\"\r\n  },\r\n  {\r\n    \"hash\": \"OOWAVVE9MJRJPBGAJNJGRWYFPXKJEJLEICGT9DQFTRCPLNPXXRHKPEXRNXMZZIONYHKTFVQDSAMHA9999\",\r\n    \"signatureMessageFragment\": \"CCKDCD999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\",\r\n    \"address\": \"ADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADR\",\r\n    \"value\": 0,\r\n    \"obsoleteTag\": \"TRYTETAG9999999999999999999\",\r\n    \"timestamp\": 1577968610,\r\n    \"currentIndex\": 1,\r\n    \"lastIndex\": 1,\r\n    \"bundle\": \"RFKGXHFLDLJWZBTQQLNGZJHCWZYYVIQJOAGTLBOWSZZAVOBIPKHHLNTEXGIGIBFACTNOFLHQWIRPJJKXY\",\r\n    \"trunkTransaction\": \"AWINHKJ9LLWEJTNF9NUQFCHSTRXXIPONTKMLWUNGLXNHZPQWJJEESCCTXIOKOANEFMWXDTHSRSAZA9999\",\r\n    \"branchTransaction\": \"OXKVIDTSPV9EUOURAIQELKKEMRY9MUFMCFAXOAHRRZPWFDZPVNBLDMEATFRCBSOWFHNXZAIZJYJCA9999\",\r\n    \"tag\": \"TRYTETAG9999999999999999999\",\r\n    \"attachmentTimestamp\": 1577968610884,\r\n    \"attachmentTimestampLowerBound\": 0,\r\n    \"attachmentTimestampUpperBound\": 3812798742493,\r\n    \"nonce\": \"XTXABIVIKBHTIJLZCMBYFYZDEJS\"\r\n  }\r\n]\r\n\r\n\r\nlet trytes = txobjects.map(e => transaction_converter.asTransactionTrytes(e))\r\n\r\niota.sendTrytes(trytes.reverse(), 3, 14)\r\n  .then(bundle => {\r\n    console.log(\'Transfer sent: https:\/\/thetangle.org\/transaction\/\' + bundle[0].hash)\r\n  })\r\n  .catch(err => {\r\n    console.log(err)\r\n  })\r\n",
-    ""
-  ]
-    
-  for(let p=0; p<code.length-1; p++){
-    showandchange(`${p}`, p)
-  }
+      '//seed, index, seclvl, checksum\nconsole.log(core.generateAddress(seed, 0, 2, true))',
+      "console.log(converter.asciiToTrytes('Text'))\nconsole.log(converter.trytesToAscii('CCTCLDHD'))",
+      "var transfers = [{\r\n    value: 0,\r\n    address: \'9\'.repeat(81),\r\n}]\nasync function main(){\r\n    try {\r\n        var trytes         = await iota.prepareTransfers(seed, transfers)\r\n        var tips           = await iota.getTransactionsToApprove(3)\r\n        var attachedTrytes = await iota.attachToTangle(tips.trunkTransaction, tips.branchTransaction, 14, trytes)\r\n                               await iota.storeAndBroadcast(attachedTrytes)\r\n        console.log(\'Transaction sent: https:\/\/thetangle.org\/transaction\/\'+transaction_converter.asTransactionObject(attachedTrytes[0]).hash)\r\n    } catch(e) {\r\n        console.log(e)\r\n    } \r\n}\r\nmain()",
+      "var transfers = [{\r\n  value: 2779530283277761,\r\n  address: \'9\'.repeat(81),\r\n  message: converter.asciiToTrytes(\'test\'),\r\n  tag:\'OUTPUT\'\r\n}]\r\nvar options = {\r\n      \'inputs\': [{\r\n            address: core.generateAddress(seed, 0, 1, true),\r\n            keyIndex: 0,\r\n            balance: 2779530283277761,\r\n            security: 1,\r\n            tag: \'INPUT\'\r\n          }]\r\n}\r\niota\r\n  .prepareTransfers(seed, transfers, options)\r\n  .then(trytes => iota.sendTrytes(trytes, 3, 14))\r\n  .then(bundle => {\r\n    console.log(\'Transfer sent: https:\/\/thetangle.org\/transaction\/\'+bundle[0].hash)\r\n  })\r\n  .catch(err => {\r\n    console.log(err)\r\n  })",
+      "var transfers = [{ value: 0, address: \'9\'.repeat(81) }]\r\nasync function promote(txhash, amount) {\r\n  try {\r\n    let trytes = await iota.prepareTransfers(\'9\'.repeat(81), transfers)\r\n    if (amount % 2 == 0) {\r\n      tips = await iota.getTransactionsToApprove(3)\r\n      attachedTrytes = await iota.attachToTangle(txhash, tips.branchTransaction, 14, trytes)\r\n    } else {\r\n      if (typeof tips == \'undefined\') {\r\n        tips = await iota.getTransactionsToApprove(3)\r\n      }\r\n      attachedTrytes = await iota.attachToTangle(txhash, tips.trunkTransaction, 14, trytes)\r\n    }\r\n    await iota.storeAndBroadcast(attachedTrytes)\r\n    console.log(\'Promotetx: https:\/\/thetangle.org\/transaction\/\' + transaction_converter.asTransactionObject(attachedTrytes[0]).hash)\r\n    amount--\r\n    if (amount > 0) {\r\n      promote(txhash, amount)\r\n    }\r\n  } catch (e) {\r\n    console.log(e)\r\n  }\r\n}\r\n\/\/tailhash, amount\r\npromote(\'txhash\', 2)", "async function main(txhash){\r\n    var txObject = await iota.getTransactionObjects([txhash]);\r\n    var bundleObject = await iota.findTransactionObjects({ bundles: [txObject[0].bundle] })\r\n    var tails = [];\r\n    for(let index = 0; index < bundleObject.length; index++){\r\n        if(bundleObject[index].currentIndex == 0){\r\n            tails.push(bundleObject[index].hash)\r\n        }\r\n    }\r\n    iota.getLatestInclusion(tails)\r\n        .then(states => {\r\n            if (states.indexOf(true) === -1) {\r\n                console.log(\'unconfirmed\')\r\n                replay(tails[0])\r\n            } else {\r\n                console.log(\'already confirmed\')\r\n            }\r\n        })\r\n}\r\nfunction replay(tailhash){\r\n    iota.replayBundle(tailhash, 3, 14)\r\n        .then(replayedBundle => console.log(replayedBundle[0].hash))\r\n        .catch(err => console.log(err))\r\n}\r\nmain(\'txhash\')",
+      "async function main(txhash){\r\n  var txObject = await iota.getTransactionObjects([txhash]);\r\n  var bundleObject = await iota.findTransactionObjects({ bundles: [txObject[0].bundle] })\r\n  for(let index = 0; index < bundleObject.length; index++){\r\n      if(bundleObject[index].value < 0){\r\n          iota.getBalances([bundleObject[index].address], 100)\r\n          .then(({ balances }) => {\r\n                  if(Math.abs(balances[0])<Math.abs(bundleObject[index].value)){\r\n                    console.log(\'Balance to send: \'+bundleObject[index].value+\', available: \'+balances[0])\r\n                    console.log(\'Not enough balance at \'+bundleObject[index].address)\r\n                  }\r\n          })\r\n          .catch(err => {\r\n              console.log(err)\r\n          })\r\n      }\r\n  }\r\n}\r\n\r\nmain(\'txhash\')",
+      "async function checkSignature(txhash) {\r\n  var txObject = await iota.getTransactionObjects([txhash])\r\n  iota.findTransactionObjects({ bundles: [txObject[0].bundle] })\r\n    .then(bundle => {\r\n      bundle.sort(function (a, b) {\r\n        return a.currentIndex - b.currentIndex;\r\n      });\r\n      console.log(\'Valid signature: \' + bundle_validator.default(bundle))\r\n    })\r\n    .catch(err => console.log(err))\r\n}\r\n\r\ncheckSignature(\'txhash\')",
+      "var transfers = [{\r\n  value: 0,\r\n  address: \'ADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADR\',\r\n  message: converter.asciiToTrytes(\'Message\'),\r\n  tag:\'TRYTETAG\'\r\n}]\r\niota\r\n  .prepareTransfers(seed, transfers)\r\n  .then(trytes => iota.sendTrytes(trytes, 3, 14))\r\n  .then(bundle => {\r\n    console.log(\'Transfer sent: https:\/\/thetangle.org\/transaction\/\'+bundle[0].hash)\r\n  })\r\n  .catch(err => {\r\n    console.log(err)\r\n  })",
+      "var iota = core.composeAPI({\r\n      provider: \'https:\/\/nodes.thetangle.org:443\',\r\n      attachToTangle: curl.localPoW\r\n})",
+      "\/\/open the browser console for realtime update\r\nvar seed = \'999999999999999999999999999999999999999999999999999999999999999999999999999999999\'\r\nvar targetAddress = \'AY9BWIUPSA99DUHCSMFVPUBPOZTIBBEJQNKFB9RD9DZSGDDAHJRYFPPDRRIMRMZDXUHPQONDNBFBAUDHDFVVVN9GTA\'\r\nvar startIndex = 0\r\nvar maxIndex = 50\r\nvar secLvl = 2\r\n\r\nconsole.log(`Search targetAddress from Index ${startIndex} to ${maxIndex} `)\r\nsearchAddress()\r\nfunction searchAddress(){\r\n  for(index = startIndex; index<maxIndex; index++){\r\n    let address = core.generateAddress(seed, index, secLvl, false)\r\n    console.log(\"Index \" + index + \": \" + address)\r\n    if(address == targetAddress.slice(0,81)){\r\n      console.log(`targetAddress found at index ${index}`)\r\n      return\r\n    }\r\n  }\r\n}",
+      "\/\/privatkey for security level 2\r\nasync function main() {\r\n  try {\r\n    let key = converter.trytesToTrits(\'GRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPECFAEQICTHWGRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOK\')\r\n    let digests = signing.digests(key)\r\n    let inputAddress = converter.tritsToTrytes(signing.address(digests))\r\n    let targetAddress = \'GRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPEC\'\r\n    let remainderAddress = \'GRQAIFYKUTSTSRYELEDVCRMB9YWWXRRUAKCCIWRJWRT9XCITNSKOOKLAWOVMCUWMCIMWWWTQIGDSNQPEC\'\r\n\r\n    let issuanceTimestamp = converter.valueToTrits(Math.floor(Date.now() \/ 1000))\r\n\r\n    let transfers = [{\r\n      address: targetAddress,\r\n      value: 0,\r\n      issuanceTimestamp\r\n    }, {\r\n      address: inputAddress,\r\n      value: 0,\r\n      issuanceTimestamp\r\n    }, {\r\n      address: inputAddress,\r\n      value: 0,\r\n      issuanceTimestamp\r\n    }, {\r\n      address: remainderAddress,\r\n      value: 0,\r\n      issuanceTimestamp\r\n    }]\r\n\r\n    await iota.getBalances([inputAddress], 100)\r\n      .then(({ balances }) => {\r\n        \/\/ transfers[1].value = balances[0] * (-1)\r\n        \/\/ transfers[0].value = balances[0]\r\n        transfers[1].value = -10\r\n        transfers[0].value = 10\r\n        console.log(\"Balance: \" + balances[0]);\r\n      })\r\n      .catch(err => {\r\n        console.log(err)\r\n      })\r\n    transfers.map(t => t.address = converter.trytesToTrits(t.address))\r\n    transfers.map(t => t.value = converter.trytesToTrits(t.value))\r\n    let createBundle = bundle.createBundle(transfers)\r\n    let finalizedBundle = bundle.finalizeBundle(createBundle)\r\n    let finalizedBundleTrytes = []\r\n    for (let offset = 0; offset < finalizedBundle.length; offset += 8019) {\r\n      finalizedBundleTrytes.push(converter.tritsToTrytes(finalizedBundle.subarray(offset, offset + 8019)))\r\n    }\r\n    let finalizedBundleObjects = finalizedBundleTrytes.map(tx => transaction_converter.asTransactionObject(tx))\r\n    let finalizedBundleHash = finalizedBundleObjects[0].bundle\r\n    let normalizedBundleHash = signing.normalizedBundle(converter.trytesToTrits(finalizedBundleHash))\r\n    let signatureFragmentOne = converter.tritsToTrytes(signing.signatureFragment(normalizedBundleHash, key))\r\n    let signatureFragmentTwo = converter.tritsToTrytes(signing.signatureFragment(normalizedBundleHash.slice(27, 54), key.slice(6561, 13122)))\r\n    finalizedBundleObjects[1].signatureMessageFragment = signatureFragmentOne.slice(0, 2187)\r\n    finalizedBundleObjects[2].signatureMessageFragment = signatureFragmentTwo.slice(0, 2187)\r\n    console.log(\'Valid signature: \' + bundle_validator.default(finalizedBundleObjects))\r\n    if (bundle_validator.default(finalizedBundleObjects)) {\r\n      let finalTrytes = finalizedBundleObjects.map(e => transaction_converter.asTransactionTrytes(e))\r\n      let tips = await iota.getTransactionsToApprove(3)\r\n      let attachedTrytes = await iota.attachToTangle(tips.trunkTransaction, tips.branchTransaction, 14, finalTrytes.reverse())\r\n      await iota.storeAndBroadcast(attachedTrytes)\r\n      console.log(\'Transaction sent: https:\/\/thetangle.org\/transaction\/\' + transaction_converter.asTransactionObject(attachedTrytes[0]).hash)\r\n    } else {\r\n      console.log(\'Invalid Bundle\');\r\n    }\r\n\r\n  } catch (e) {\r\n    console.log(e)\r\n  }\r\n}\r\n\r\nmain()",
+      "iota.getBalances([\'999999999999999999999999999999999999999999999999999999999999999999999999999999999\'], 100)\r\n          .then(({ balances }) => {\r\n                    console.log(\'Balance: \'+balances[0]+\'i\')\r\n          })\r\n          .catch(err => {\r\n              console.log(err)\r\n          })",
+      "var permArr = []\r\nvar usedChars = []\r\n\r\nvar permutations = permute([\'GRL\', \'EGO\'])\r\n\/\/0 = permutations placeholder \r\nvar fixedOrder = [\'WTEDOROFS\', 0, \'OHLCDYJMJULRMIXFSTSFSULWJPEGTRAHRWRHWOAXTO9SHHZMNMFGRBPUHFVNEFD\', 0, \'JFR\']\r\n\r\nvar targetAddress = \'ICXTBZHXTPSNMSAKPFGRGVWHSVY9OTUIA9SSDUGUOOCCLPGNUCKJUFUOFHENTNREEPOPLJXQROHXEGRJBJPANMGVMW\'\r\n\r\nmain()\r\nasync function main() {\r\n  try {\r\n    var seedlist = []\r\n    for (let l = 0; l < permutations.length; l++) {\r\n      let placeholder = []\r\n      let placeholderFixed = [...fixedOrder]\r\n\r\n      for (let u = 0; u < placeholderFixed.length; u++) {\r\n        if (placeholderFixed[u] == 0) {\r\n          placeholderFixed[u] = permutations[l].shift()\r\n        }\r\n        placeholder.push(placeholderFixed[u])\r\n      }\r\n      seedlist.push(placeholder.join(\'\'))\r\n    }\r\n    if (seedlist[0].length != 81) {\r\n      throw new Error(\"Seed zu kurz\");\r\n    }\r\n    console.log(seedlist)\r\n\r\n    for (let k = 0; k < seedlist.length; k++) {\r\n      await new Promise(resolve => setTimeout(resolve, 500));\r\n      sendfromSeed(seedlist[k])\r\n    }\r\n  } catch (e) {\r\n    console.log(e)\r\n  }\r\n}\r\n\r\nasync function sendfromSeed(seed) {\r\n  try {\r\n    let addressArray = []\r\n    addressArray.push(core.generateAddress(seed, 0, 2, true))\r\n    \/\/ addressArray.push(core.generateAddress(seed, 1, 2, true))\r\n    \/\/ addressArray.push(core.generateAddress(seed, 3, 2, true))\r\n    let balancedata = await iota.getBalances(addressArray, 100)\r\n    let finalbalance = 0\r\n    balancedata.balances.forEach(e => {\r\n      finalbalance += e\r\n    })\r\n    console.log(finalbalance);\r\n    if (finalbalance == 0) {\r\n      return\r\n    }\r\n    let transfers = [{\r\n      address: targetAddress,\r\n      value: finalbalance\r\n    }]\r\n    let trytes = await iota.prepareTransfers(seed, transfers)\r\n    let bundle = await iota.sendTrytes(trytes, 3, 14)\r\n    console.log(`https:\/\/thetangle.org\/transaction\/${bundle[0].hash}`)\r\n  } catch (e) {\r\n    console.log(e)\r\n  }\r\n}\r\n\r\nfunction permute(input) {\r\n  var i, ch;\r\n  for (i = 0; i < input.length; i++) {\r\n    ch = input.splice(i, 1)[0];\r\n    usedChars.push(ch);\r\n    if (input.length == 0) {\r\n      permArr.push(usedChars.slice());\r\n    }\r\n    permute(input);\r\n    input.splice(i, 0, ch);\r\n    usedChars.pop();\r\n  }\r\n  return permArr\r\n}",
+      "var seed = \'JWZCMYEVYUSWUFBCNSZWIYOETPTZAJNWIABY9VJCLQJGTKFFWWWOZXCEUCRSGGTFRPSQCGRSJOQOBBE9C\'\r\nvar addressIndex = 325\r\n\r\nvar newseed = indexZeroSeed(seed, addressIndex)\r\nconsole.log(\"Old seed: \"+seed)\r\nconsole.log(\"New seed: \"+newseed)\r\n\r\nconsole.log(\"Old \"+core.generateAddress(seed, addressIndex, 2, true))\r\nconsole.log(\"New \"+core.generateAddress(newseed, 0, 2, true))\r\n\r\n\/\/returns seed with the address at index 0\r\n\/\/limited to low values and doesn\'t work with all seeds\r\nfunction indexZeroSeed(seed, addressIndex) {\r\n\tlet value = converter.tritsToValue(converter.trytesToTrits(seed.slice(0, 8)))\r\n\tvalue+=addressIndex\r\n\tlet newTrytes = converter.tritsToTrytes(converter.valueToTrits(value))\r\n\tnewTrytes+=\'9\'.repeat(8)\r\n  let newSeed = newTrytes.slice(0, 8)+seed.slice(8)\r\n  let addressOld = core.generateAddress(seed, addressIndex, 2, true)\r\n  let addressNew = core.generateAddress(newSeed, 0, 2, true)\r\n  if(addressOld != addressNew){\r\n    console.log(\"Didn\'t work\")\r\n  } else {\r\n    return newSeed\r\n  }\r\n}",
+      "var seed = \'TROLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLL\'\r\n\/\/address with checksum (90 trytes), iotas will be moved to this address\r\nlet destination_address = \'ONDFXGQGUVCXPHUJPHT9HJXDJU99ZJQX9WT9PGKRDFXWGHTYEEUJKEMFEBTKS9KJFBFSRWNRYFO9JSNSYRFAPLEUV9\'\r\n\/\/address options\r\nlet sec_lvl = 2\r\nlet start_index = 0\r\nlet end_index = 9\r\n\r\nasync function send_all_iotas(seed, destination_address, sec_lvl, start_index, end_index) {\r\n  try {\r\n    if (!checksum.isValidChecksum(destination_address)) {\r\n      console.error(\"Invalid destination_address\");\r\n      return\r\n    }\r\n\r\n    let addresses = generate_addresses(seed, sec_lvl, start_index, end_index)\r\n    \/\/ console.log(addresses);\r\n    let balances = await addresses_with_balance(addresses)\r\n    \/\/ console.log(balances);\r\n    let total_balance = balances.reduce((a, b) => {\r\n      return a + b;\r\n    })\r\n\r\n    if (total_balance <= 0) {\r\n      console.error(\"No iotas found\");\r\n      return\r\n    }\r\n\r\n    let transfers = [{\r\n      value: total_balance,\r\n      address: destination_address\r\n    }]\r\n\r\n    let options = {\r\n      \'inputs\': []\r\n    }\r\n\r\n    for (let k = 0; k < balances.length; k++) {\r\n      if (balances[k] > 0) {\r\n        options.inputs.push({\r\n          address: addresses[k],\r\n          keyIndex: k+start_index,\r\n          balance: balances[k],\r\n          security: sec_lvl\r\n        })\r\n      }\r\n    }\r\n\r\n    let trytes = await iota.prepareTransfers(seed, transfers, options)\r\n    let bundle = await iota.sendTrytes(trytes, 3, 14)\r\n    console.log(\'Transfer sent: https:\/\/thetangle.org\/transaction\/\' + bundle[0].hash)\r\n\r\n  } catch (err) {\r\n    console.error(err)\r\n  }\r\n}\r\n\r\nasync function addresses_with_balance(addresses) {\r\n  let res = await iota.getBalances(addresses, 100)\r\n  return res.balances\r\n}\r\n\r\nfunction generate_addresses(seed, sec_lvl, start_index, end_index) {\r\n  let addresses = []\r\n  for (let index = start_index; index < end_index + 1; index++) {\r\n    addresses.push(core.generateAddress(seed, index, sec_lvl, false))\r\n  }\r\n  return addresses\r\n}\r\n\r\nsend_all_iotas(seed, destination_address, sec_lvl, start_index, end_index)",
+      "var seed = \'TROLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLOLL\'\r\n\r\n\/\/address options\r\nlet sec_lvl = 2\r\nlet start_index = 0\r\nlet end_index = 9\r\n\r\nasync function getBalance(seed, sec_lvl, start_index, end_index) {\r\n  try {\r\n    let addresses = generate_addresses(seed, sec_lvl, start_index, end_index)\r\n    console.log(addresses)\r\n    let balances = await iota.getBalances(addresses, 100)\r\n    let total_balance = balances.balances.reduce((a, b) => {\r\n      return a + b;\r\n    })\r\n    console.log(\'Balance: \' + total_balance )\r\n\r\n  } catch (err) {\r\n    console.error(err)\r\n  }\r\n}\r\n\r\nfunction generate_addresses(seed, sec_lvl, start_index, end_index) {\r\n  let addresses = []\r\n  for (let index = start_index; index < end_index + 1; index++) {\r\n    addresses.push(core.generateAddress(seed, index, sec_lvl, false))\r\n  }\r\n  return addresses\r\n}\r\n\r\ngetBalance(seed, sec_lvl, start_index, end_index)",
+      "let address = \'IKTYKKCZFZZECSFIJYWYSUUTXCIBNIFPFSPGUIUUAYONDYUSHEZVQBNPDYUTDMTNTHBLABCYYLZKLGIVCINGBALQVX\'\r\n\r\nmain()\r\nfunction main() {\r\n  let cda = generateCDA(address)\r\n  console.log(cda)\r\n  let addressWithChecksum = getAddressWithChecksum(cda)\r\n  console.log(\"Address: \" + addressWithChecksum)\r\n\r\n  \/\/add message\r\n  cda.message = \'Test message\'\r\n  \/\/add receiver\r\n  cda.receiver = \'Not spark wallet :carlos:\'\r\n  let sparkLink = generateSparkLink(cda)\r\n  console.log(sparkLink);\r\n  console.log(\"Address: \" + getAdressFromSparkLink(sparkLink));\r\n}\r\n\r\nfunction generateCDA(address) {\r\n  let timeoutAt = Math.floor(Date.now() + 24 * 60 * 60 * 1000)\r\n  let multiUse = false\r\n  let expectedAmount = 1\r\n  let checksum = converter.tritsToTrytes(cda.CDAChecksum(converter.trytesToTrits(address), converter.valueToTrits(timeoutAt), cda.CDAMultiUseBooleanAsTrit(multiUse), converter.valueToTrits(expectedAmount || 0)))\r\n  let addressWithCDAChecksum = address.slice(0, 81) + checksum\r\n  let newCDA = { address: addressWithCDAChecksum, timeoutAt, multiUse, expectedAmount }\r\n  cda.verifyCDAChecksum(newCDA)\r\n  return newCDA\r\n}\r\n\r\nfunction getAddressWithChecksum(cda) {\r\n  return checksum.addChecksum(cda.address.slice(0, 81))\r\n}\r\n\r\nfunction generateSparkLink(cda) {\r\n  let { address, timeoutAt, message, expectedAmount, receiver } = cda\r\n  let link = \'https:\/\/spark.iota.org\/?address=\' + address + \'&timeoutAt=\' + timeoutAt + \'&amount=\' + expectedAmount\r\n  if (typeof message != \'undefined\') {\r\n    link += \'&message=\' + message.replace(\/ \/g, \"%20\")\r\n  }\r\n  if (typeof message != \'undefined\') {\r\n    link += \'&receiver=\' + receiver.replace(\/ \/g, \"%20\")\r\n  }\r\n  return link\r\n}\r\n\r\nfunction getAdressFromSparkLink(link) {\r\n  return checksum.addChecksum(link.slice(32, 113))\r\n}\r\n\r\n",
+      "fetchMessage(\'PDZ9XWAK9MIQARXUZJ9DRBDGSYPMOYQE9TZD9RVZYTCOHZORJFBYTZKWZONDWLVNBEDYCWDYMVSU99999\')\r\n\r\nasync function fetchMessage(tailHash) {\r\n  try {\r\n    let bundle = await iota.getBundle(tailHash)\r\n    let msgTrytes = \'\';\r\n    bundle.map(e => msgTrytes += e.signatureMessageFragment)\r\n    let msg = converter.trytesToAscii(remove_nines(msgTrytes))\r\n    console.log(msg)\r\n  } catch (err) {\r\n    console.log(err);\r\n  }\r\n\r\n}\r\n\r\nfunction remove_nines(trytes) {\r\n  let endposition = trytes.length;\r\n  if (trytes.length % 2 != 0) {\r\n    trytes = trytes.slice(0, -1)\r\n  }\r\n  for (let j = 0; j < trytes.length; j += 2) {\r\n    if (trytes.slice(j, j + 2) == \'99\') {\r\n      endposition = j;\r\n      break;\r\n    }\r\n  }\r\n  return trytes.slice(0, endposition)\r\n}",
+      "let txobjects = [\r\n  {\r\n    \"hash\": \"BRHD9LBIFWRFRKJWIPQUBY9QCBWYNGDL9QOSAGMSHW9K9MMSZEFMMAWVAARABBUHOPQTGQQIRXO9Z9999\",\r\n    \"signatureMessageFragment\": \"YBBDTC999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\",\r\n    \"address\": \"ADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADR\",\r\n    \"value\": 0,\r\n    \"obsoleteTag\": \"WUYTETAG9999999999999999999\",\r\n    \"timestamp\": 1577968610,\r\n    \"currentIndex\": 0,\r\n    \"lastIndex\": 1,\r\n    \"bundle\": \"RFKGXHFLDLJWZBTQQLNGZJHCWZYYVIQJOAGTLBOWSZZAVOBIPKHHLNTEXGIGIBFACTNOFLHQWIRPJJKXY\",\r\n    \"trunkTransaction\": \"OOWAVVE9MJRJPBGAJNJGRWYFPXKJEJLEICGT9DQFTRCPLNPXXRHKPEXRNXMZZIONYHKTFVQDSAMHA9999\",\r\n    \"branchTransaction\": \"AWINHKJ9LLWEJTNF9NUQFCHSTRXXIPONTKMLWUNGLXNHZPQWJJEESCCTXIOKOANEFMWXDTHSRSAZA9999\",\r\n    \"tag\": \"TRYTETAG9999999999999999999\",\r\n    \"attachmentTimestamp\": 1577968611108,\r\n    \"attachmentTimestampLowerBound\": 0,\r\n    \"attachmentTimestampUpperBound\": 3812798742493,\r\n    \"nonce\": \"ZBYPFYBR9PLVPFEGARAGRSU9OTS\"\r\n  },\r\n  {\r\n    \"hash\": \"OOWAVVE9MJRJPBGAJNJGRWYFPXKJEJLEICGT9DQFTRCPLNPXXRHKPEXRNXMZZIONYHKTFVQDSAMHA9999\",\r\n    \"signatureMessageFragment\": \"CCKDCD999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\",\r\n    \"address\": \"ADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADRESSADR\",\r\n    \"value\": 0,\r\n    \"obsoleteTag\": \"TRYTETAG9999999999999999999\",\r\n    \"timestamp\": 1577968610,\r\n    \"currentIndex\": 1,\r\n    \"lastIndex\": 1,\r\n    \"bundle\": \"RFKGXHFLDLJWZBTQQLNGZJHCWZYYVIQJOAGTLBOWSZZAVOBIPKHHLNTEXGIGIBFACTNOFLHQWIRPJJKXY\",\r\n    \"trunkTransaction\": \"AWINHKJ9LLWEJTNF9NUQFCHSTRXXIPONTKMLWUNGLXNHZPQWJJEESCCTXIOKOANEFMWXDTHSRSAZA9999\",\r\n    \"branchTransaction\": \"OXKVIDTSPV9EUOURAIQELKKEMRY9MUFMCFAXOAHRRZPWFDZPVNBLDMEATFRCBSOWFHNXZAIZJYJCA9999\",\r\n    \"tag\": \"TRYTETAG9999999999999999999\",\r\n    \"attachmentTimestamp\": 1577968610884,\r\n    \"attachmentTimestampLowerBound\": 0,\r\n    \"attachmentTimestampUpperBound\": 3812798742493,\r\n    \"nonce\": \"XTXABIVIKBHTIJLZCMBYFYZDEJS\"\r\n  }\r\n]\r\n\r\n\r\nlet trytes = txobjects.map(e => transaction_converter.asTransactionTrytes(e))\r\n\r\niota.sendTrytes(trytes.reverse(), 3, 14)\r\n  .then(bundle => {\r\n    console.log(\'Transfer sent: https:\/\/thetangle.org\/transaction\/\' + bundle[0].hash)\r\n  })\r\n  .catch(err => {\r\n    console.log(err)\r\n  })\r\n",
+      ""
+    ]
+
+    for (let p = 0; p < code.length - 1; p++) {
+      showandchange(`${p}`, p)
+    }
 
     //Hover and change
-    function showandchange(id, index){
+    function showandchange(id, index) {
       let e = document.getElementById(id)
-      e.onmouseover = function(){visible[0]=0;show("input", index)};
-      e.onmouseout = function(){show("input", index)};
-      e.onclick = function(){change("input", index)};
+      e.onmouseover = function () { visible[0] = 0; show("input", index) };
+      e.onmouseout = function () { show("input", index) };
+      e.onclick = function () { change("input", index) };
     }
-    var inputstorage=''
-    var visible=[]
+    var inputstorage = ''
+    var visible = []
     function show(id, index) {
       var e = document.getElementById(id);
-        if (visible[index] == 1) {
-          visible[index] = 0
-          e.value = inputstorage
-        } else {
-          inputstorage = e.value
-          e.value = e.value+code[index]+"\n"
-          visible[index] = 1
-        }
+      if (visible[index] == 1) {
+        visible[index] = 0
+        e.value = inputstorage
+      } else {
+        inputstorage = e.value
+        e.value = e.value + code[index] + "\n"
+        visible[index] = 1
+      }
     }
-    document.getElementById("input").oninput = function(){var e = document.getElementById("input");inputstorage = e.value};
+    document.getElementById("input").oninput = function () { var e = document.getElementById("input"); inputstorage = e.value };
     function change(id, index) {
       var id = document.getElementById(id);
-      inputstorage+=code[index]+"\n\n"
-      id.value= inputstorage
+      inputstorage += code[index] + "\n\n"
+      id.value = inputstorage
       visible[index] = 1
     }
-    
+
     //Code and output
     function doIt() {
-        var headID = document.getElementsByTagName("head")[0];
-        var newScript = document.createElement("script");
-        newScript.type = "text/javascript";
-        newScript.innerHTML = 'function executethecode(){\r\ntry{'+document.getElementById("input").value+'}catch(err){console.log(err.message)}}\r\nexecutethecode()'
-        headID.appendChild(newScript);
+      var headID = document.getElementsByTagName("head")[0];
+      var newScript = document.createElement("script");
+      newScript.type = "text/javascript";
+      newScript.innerHTML = 'function executethecode(){\r\ntry{' + document.getElementById("input").value + '}catch(err){console.log(err.message)}}\r\nexecutethecode()'
+      headID.appendChild(newScript);
     }
     // var realConsoleLog = console.log;
     var log = document.querySelector('.console');
-    ['log','debug','info','warn','error'].forEach(function (verb) {
-        console[verb] = (function (method, verb, log) {
-            return function () {
-                method.apply(console, arguments);
-                // realConsoleLog.apply(console, arguments);
-                if(typeof arguments[0] == "object"){
-                  document.getElementById("console").value += JSON.stringify(arguments[0], null, 1)+"\n"
-                } else{
-                  document.getElementById("console").value += arguments[0]+"\n"
-                }
-            };
-        })(console[verb], verb, log);
+    ['log', 'debug', 'info', 'warn', 'error'].forEach(function (verb) {
+      console[verb] = (function (method, verb, log) {
+        return function () {
+          method.apply(console, arguments);
+          // realConsoleLog.apply(console, arguments);
+          if (typeof arguments[0] == "object") {
+            document.getElementById("console").value += JSON.stringify(arguments[0], null, 1) + "\n"
+          } else {
+            document.getElementById("console").value += arguments[0] + "\n"
+          }
+        };
+      })(console[verb], verb, log);
     });
-    </script>
-    </body>
-    </html>
+  </script>
+</body>
+
+</html>
